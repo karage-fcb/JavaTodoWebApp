@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 	 * login.jspを画面に表示
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("login.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute(SessionInfo.LOGIN_USER_ID, loginId);
 			path = "list-servlet";
 		} else {
-			path = "login.jsp";
+			path = "WEB-INF/jsp/login.jsp";
 		}
 
 		// 設定されているパスに遷移する

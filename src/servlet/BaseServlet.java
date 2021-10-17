@@ -49,7 +49,7 @@ public abstract class BaseServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else {
-			request.getRequestDispatcher("login.jsp").forward(request, response);;
+			request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);;
 		}
 	}
 

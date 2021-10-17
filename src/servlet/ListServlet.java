@@ -45,7 +45,7 @@ public class ListServlet extends BaseServlet {
 		// todo一覧をリクエストスコープに設定する
 		request.setAttribute("todoList", todoList);
 		// todo一覧画面に遷移する
-		RequestDispatcher rd = request.getRequestDispatcher("list.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/list.jsp");
 		rd.forward(request, response);
 	}
 }

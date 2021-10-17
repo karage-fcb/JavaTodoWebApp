@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file='base.html' %>
+<%@ include file='header.jsp' %>
+<%-- <jsp:include page="header.jsp"> --%>
 <title>Todo List</title>
 </head>
 <body>
@@ -32,7 +33,10 @@
 		%>
 		<hr>
 		<form action="insert-servlet" method="post">
-			<label>Todo: </label><input type="text" name="<%=Parameters.TODO %>"><br>
+			<div class="form-floating">
+			  <textarea class="form-control" name="<%=Parameters.TODO %>" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+			  <label for="floatingTextarea2">Todo</label>
+			</div>
 			<label>Limit: </label><input type="date" name="<%=Parameters.TIME_LIMIT %>"> <br>
 			<input type="submit" value="Todoを登録する">
 		</form>

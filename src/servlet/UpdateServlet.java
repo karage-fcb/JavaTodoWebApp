@@ -18,40 +18,49 @@ import model.dao.dto.TodoDTO;
  * Servlet implementation class UpdateServlet
  */
 @WebServlet("/update-servlet")
-public class UpdateServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
+public class UpdateServlet extends BaseServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
     public UpdateServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * リクエストパラメータから送られてきたTodoのIDをもとにDBからデータを取得し、画面に表示する
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	protected void exec(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException, ClassNotFoundException {
+		// メソッドの取得
+		String method = request.getMethod();
+
+		if (method.equals("GET")) {
+			getGetRequest(request, response);
+		} else if (method.equals("POST")) {
+			getPostRequest(request, response);
+		}
+	}
+
+	protected void getGetRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException, ClassNotFoundException {
 		// リクエストパラメータからtodoIdを取得する
-		int todoId = Integer.parseInt(request.getParameter(Parameters.TODO_ID));
+		int todoId = 0;
+		try {
+			todoId = Integer.parseInt(request.getParameter(Parameters.TODO_ID));
+		} catch (NumberFormatException e) {
+			request.getRequestDispatcher("list-servlet").forward(request, response);
+		}
 
 		UpdateDAO dao = new UpdateDAO();
 		TodoDTO todo = new TodoDTO();
-		try {
-			// todoの取得
-			todo = dao.getTodo(todoId);
-		} catch (SQLException | ClassNotFoundException e ) {
-			e.printStackTrace();
-		}
+
+		// todoの取得
+		todo = dao.getTodo(todoId);
 
 		request.setAttribute("todo", todo);
-		request.getRequestDispatcher("update.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/jsp/update.jsp").forward(request, response);
 	}
 
-	/**
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void getPostRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException, ClassNotFoundException {
 		// リクエストパラメータから値を取得する
 		request.setCharacterEncoding("UTF-8");
 		int id = Integer.parseInt(request.getParameter(Parameters.TODO_ID));
@@ -60,14 +69,10 @@ public class UpdateServlet extends HttpServlet {
 
 		// DAOを生成し、Todoを更新する
 		UpdateDAO dao = new UpdateDAO();
-		try {
-			// 受け取ったパラメータを元にデータベースを更新する
-			dao.updateTodo(id, todo, timeLimit);
-		} catch(SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+
+		// 受け取ったパラメータを元にデータベースを更新する
+		dao.updateTodo(id, todo, timeLimit);
 
 		response.sendRedirect("list-servlet");
 	}
-
 }
