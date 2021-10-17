@@ -8,8 +8,8 @@ public class DBConnection {
 
 	public static Connection getConnection() throws SQLException, ClassNotFoundException {
 		final String URL = "jdbc:postgresql://localhost:5432/tododb";
-		final String USER = "k17089kk";
-		final String PASSWORD = "ilsg7517";
+		final String USER = System.getenv("POSTGRE_USER_NAME");
+		final String PASSWORD = System.getenv("POSTGRE_PASSWORD");
 
 		Class.forName("org.postgresql.Driver");
 		Connection con = DriverManager.getConnection(URL, USER, PASSWORD);

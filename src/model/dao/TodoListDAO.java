@@ -14,7 +14,7 @@ import model.dao.dto.TodoDTO;
 /**
  * Todoの一覧を取得するクラス
  *
- * @author yuhablog
+ * @author uhablog
  */
 public class TodoListDAO {
 

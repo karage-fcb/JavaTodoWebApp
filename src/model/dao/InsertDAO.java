@@ -9,7 +9,7 @@ import model.DBConnection;
 
 /**
  * Todoをデータベースに登録するクラス
- * @author yuhablog
+ * @author uhablog
  */
 public class InsertDAO {
 
