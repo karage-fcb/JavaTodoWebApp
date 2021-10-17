@@ -12,6 +12,7 @@
     <a class="navbar-brand" href="list-servlet">Todo アプリ</a>
     <span class="navbar-text">
     	<%=session.getAttribute(SessionInfo.LOGIN_USER_ID) %>
+	    <a href="LogoutServlet">ログアウト</a>
     </span>
   </div>
 </nav>

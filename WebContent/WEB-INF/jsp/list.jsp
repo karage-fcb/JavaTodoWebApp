@@ -32,6 +32,7 @@
 			}
 		%>
 		<hr>
+		<h3>Todoの新規登録</h3>
 		<form action="insert-servlet" method="post">
 			<div class="form-floating">
 			  <textarea class="form-control" name="<%=Parameters.TODO %>" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
