@@ -23,6 +23,11 @@ public class TodoDTO {
 	private Date timeLimit;
 
 	/**
+	 * Todo作成者のidを保持する
+	 */
+	private String userId;
+
+	/**
 	 * 引数なしコンストラクタ
 	 * 初期化を行う
 	 */
@@ -92,4 +97,19 @@ public class TodoDTO {
 		this.timeLimit = timeLimit;
 	}
 
+	/**
+	 * Todoの作成者のidを取得する
+	 * @return
+	 */
+	public String getUserId() {
+		return userId;
+	}
+
+	/**
+	 * Todoの作成者のidを設定する
+	 * @param userId
+	 */
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 }

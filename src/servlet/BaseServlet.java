@@ -17,11 +17,24 @@ import constant.SessionInfo;
 public abstract class BaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * ログイン中のユーザーIDを保持する
+	 */
+	private String UserId;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
     public BaseServlet() {
         super();
+    }
+
+    /**
+     * ログイン中のユーザーIDを取得する
+     * @return
+     */
+    public String getLoginUserId() {
+    	return UserId;
     }
 
 	/**
@@ -44,6 +57,7 @@ public abstract class BaseServlet extends HttpServlet {
 		// セッションにログイン中のユーザーIDが存在する時
 		if (loginUserId != null) {
 			try {
+				UserId = loginUserId;
 				exec(request, response);
 			} catch (SQLException | ClassNotFoundException e) {
 				e.printStackTrace();

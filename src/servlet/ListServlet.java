@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.dao.TodoListDAO;
 import model.dao.dto.TodoDTO;
+import model.viewModel.ListViewModel;
 
 /**
  * Servlet implementation class ListServlet
@@ -42,8 +43,13 @@ public class ListServlet extends BaseServlet {
 		// todo一覧を取得する
 		todoList = dao.getTodoList();
 
-		// todo一覧をリクエストスコープに設定する
-		request.setAttribute("todoList", todoList);
+		// Todo一覧に渡すモデルの生成
+		ListViewModel viewModel = new ListViewModel();
+		viewModel.setTodoList(todoList);
+		viewModel.setLoginUserId(this.getLoginUserId());
+
+		// viewModelをリクエストスコープに設定する
+		request.setAttribute("viewModel", viewModel);
 		// todo一覧画面に遷移する
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/list.jsp");
 		rd.forward(request, response);

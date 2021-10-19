@@ -40,7 +40,7 @@ public class InsertServlet extends BaseServlet {
 		InsertDAO dao = new InsertDAO();
 
 		// 受け取ったパラメータを引数に渡す
-		dao.insertTodo(todo, timeLimit);
+		dao.insertTodo(todo, timeLimit, this.getLoginUserId());
 
 		response.sendRedirect("list-servlet");
 	}

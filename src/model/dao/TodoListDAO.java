@@ -29,7 +29,7 @@ public class TodoListDAO {
 		List<TodoDTO> todoList = new ArrayList<>();
 
 		// 実行するSQL
-		String sql = "SELECT id, todo, timeLimit from todo";
+		String sql = "SELECT id, todo, timeLimit, userid from todo";
 
 		// DBに接続し、Todo一覧を取得する
 		try (Connection con = DBConnection.getConnection();
@@ -39,11 +39,17 @@ public class TodoListDAO {
 			ResultSet res = pstmt.executeQuery();
 			while (res.next()) {
 				int id = res.getInt("id");
-				String todo = res.getString("todo");
+				String todoContent = res.getString("todo");
 				Date timeLimit = res.getDate("timeLimit");
+				String userId = res.getString("userid");
 
 				// 取得したid, todo, timeLimitでTodoDTOを初期化してListに追加
-				todoList.add(new TodoDTO(id, todo, timeLimit));
+				TodoDTO todo = new TodoDTO();
+				todo.setId(id);
+				todo.setTodo(todoContent);
+				todo.setTimeLimit(timeLimit);
+				todo.setUserId(userId);
+				todoList.add(todo);
 			}
 		}
 

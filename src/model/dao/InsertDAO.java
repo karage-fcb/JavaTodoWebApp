@@ -18,16 +18,17 @@ public class InsertDAO {
 	 *
 	 * @param todoの内容
 	 * @param 期限
+	 * @param ログインユーザーID
 	 * @return 登録数
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public int insertTodo(String todo, Date timeLimit)throws ClassNotFoundException, SQLException {
+	public int insertTodo(String todo, Date timeLimit, String loginUserId)throws ClassNotFoundException, SQLException {
 		// 更新した行数を返却するための変数
 		int processingNumber = 0;
 
 		// 実行するSQL
-		String sql = "INSERT INTO todo (todo, timeLimit) VALUES (?, ?)";
+		String sql = "INSERT INTO todo (todo, timeLimit, userid) VALUES (?, ?, ?)";
 
 		// SQLを実行する
 		try(Connection con = DBConnection.getConnection();
@@ -37,6 +38,7 @@ public class InsertDAO {
 			pstmt.setString(1, todo);
 			// 2つ目のパラメータにtimeLimitの内容を設定
 			pstmt.setDate(2, timeLimit);
+			pstmt.setString(3, loginUserId);
 			// SQLを実行し、実行行数を受け取る
 			processingNumber = pstmt.executeUpdate();
 		}
